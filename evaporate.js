@@ -1132,6 +1132,18 @@
                     return authorizedSignWithLambda(authRequester);
                 }
 
+                if (con.webIdentity) {
+                    authRequester.x_amz_headers = extend(authRequester.x_amz_headers, {
+                        'x-amz-security-token': con.sessionToken
+                    });
+                    authRequester.auth = con.signingFunction({
+                        secret: con.secretAccessKey,
+                        message: makeStringToSign(authRequester)
+                    });
+                    authRequester.onGotAuth();
+                    return;
+                }
+
                 var xhr = assignCurrentXhr(authRequester),
                     url = con.signerUrl + '?to_sign=' + encodeURIComponent(makeStringToSign(authRequester)),
                     warnMsg;
