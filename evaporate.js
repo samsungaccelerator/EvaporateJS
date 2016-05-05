@@ -152,6 +152,10 @@
 
         //con.simulateStalling =  true
 
+        _.setConfig = function (updatedConfig) {
+            extend(con, updatedConfig);
+        };
+
         _.add = function (file) {
 
             l.d('add');
