@@ -166,7 +166,8 @@
             if (typeof file.name === 'undefined') {
                 err = 'Missing attribute: name  ';
             } else if (con.encodeFilename) {
-                file.name = encodeURIComponent(file.name); // prevent signature fail in case file name has spaces
+                file.name = encodeURIComponent(file.name) // prevent signature fail in case file name has spaces
+                  .replace(/%2F/g, '/'); // And then make sure slashes are handled correctly
             }
 
             /*if (!(file.file instanceof File)){
