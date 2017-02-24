@@ -336,6 +336,9 @@
                 if (me.contentType) {
                     initiate.contentType = me.contentType;
                 }
+                if (me.contentDisposition) {
+                    initiate.contentDisposition = me.contentDisposition;
+                }
 
                 initiate.onErr = function (xhr) {
                     if (hasErrored || me.status === ABORTED || me.status === CANCELED) {
@@ -1083,6 +1086,10 @@
 
                     if (requester.contentType) {
                         xhr.setRequestHeader('Content-Type', requester.contentType);
+                    }
+
+                    if (requester.contentDisposition) {
+                        xhr.setRequestHeader('Content-Disposition', requester.contentDisposition);
                     }
 
                     if (requester.md5_digest) {
